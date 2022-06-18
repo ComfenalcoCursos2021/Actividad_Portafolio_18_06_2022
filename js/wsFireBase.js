@@ -1,6 +1,6 @@
 importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js");
-
+importScripts("Plantillas.js");
 const firebaseConfig = {
     apiKey: "AIzaSyDFLrIzXZY8OmpbHMUvVNOsK7mkvNvxYTw",
     authDomain: "actividadportafolio-1117d.firebaseapp.com",
@@ -13,7 +13,16 @@ const firebaseConfig = {
 
 addEventListener("message", ()=>{
     firebase.initializeApp(firebaseConfig);
-    firebase.database().ref("lista").on("value", (e)=>{
-        postMessage(e.val());
+    firebase.database().ref("menu").on("value", (e)=>{
+        postMessage({menu: menu(e.val())});
+    })
+    firebase.database().ref("home").on("value", (e)=>{
+        postMessage({home: home(e.val())});
+    })
+    firebase.database().ref("about").on("value", (e)=>{
+        postMessage({about: about(e.val())});
+    })
+    firebase.database().ref("service").on("value", (e)=>{
+        postMessage({service: service(e.val())});
     })
 })
